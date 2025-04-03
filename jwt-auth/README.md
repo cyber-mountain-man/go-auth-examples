@@ -1,3 +1,8 @@
+
+
+### 📄 `jwt-auth/README.md`
+
+```markdown
 # JWT-Based Authentication API in Go
 
 This project demonstrates a basic JSON Web Token (JWT) authentication flow built with Go. It is part of the [`go-auth-examples`](https://github.com/cyber-mountain-man/go-auth-examples) repository, which contains a collection of authentication examples for learning and reference.
@@ -7,10 +12,10 @@ This project demonstrates a basic JSON Web Token (JWT) authentication flow built
 ## 🔐 Features
 
 - Stateless authentication using signed JWTs
-- Secure token generation and expiration
-- Middleware to protect routes
+- Secure token generation with expiration
+- Middleware-protected routes
 - JSON request and response handling
-- Minimal, clear structure for educational purposes
+- Clear, minimal structure for educational use
 
 ---
 
@@ -69,13 +74,25 @@ Authenticates the user and returns a signed JWT token.
 }
 ```
 
-#### Response (JSON)
+#### Example Request with `curl`
 
-```json
-{
-  "token": "<your-jwt-token>"
-}
+##### Linux/macOS:
+
+```bash
+curl -X POST http://localhost:8080/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","password":"1234"}'
 ```
+
+##### Windows PowerShell:
+
+```powershell
+curl -X POST http://localhost:8080/login `
+  -H "Content-Type: application/json" `
+  -d "{\"username\":\"admin\",\"password\":\"1234\"}"
+```
+
+> ✅ Tip: You can also use [Postman](https://www.postman.com/) for easier testing without needing to escape quotes.
 
 ---
 
@@ -83,10 +100,17 @@ Authenticates the user and returns a signed JWT token.
 
 Requires a valid JWT in the `Authorization` header.
 
-#### Header
+#### Header Format
 
 ```
 Authorization: Bearer <your-jwt-token>
+```
+
+#### Example:
+
+```bash
+curl http://localhost:8080/dashboard \
+  -H "Authorization: Bearer <your-jwt-token>"
 ```
 
 #### Response
@@ -102,28 +126,28 @@ Authorization: Bearer <your-jwt-token>
 ## 🔧 Technologies Used
 
 - [Go](https://golang.org/)
-- [golang-jwt/jwt](https://github.com/golang-jwt/jwt) for token creation and verification
-- `net/http` standard library for routing and HTTP handling
+- [golang-jwt/jwt](https://github.com/golang-jwt/jwt) – JWT creation & validation
+- `net/http` – Built-in web server & routing
 
 ---
 
 ## 🎯 Purpose
 
-This project is designed for developers who want to learn how to:
+This project is intended for developers who want to learn how to:
 
 - Implement stateless authentication in Go
-- Work with JWT tokens
-- Protect REST API routes
-- Understand basic middleware usage
+- Secure API endpoints using JWTs
+- Understand basic auth middleware patterns
 
-It serves as a foundational example for more advanced auth setups, such as refresh tokens and OAuth2.
+It’s a foundational example designed for educational and prototyping purposes.
 
 ---
 
 ## 🛡️ Security Notes
 
-- The signing key (`jwtKey`) is hardcoded for demo purposes — store secrets securely in environment variables in production
-- In real applications, replace the hardcoded user check with a proper user database
+- 🔒 The JWT signing key is hardcoded — in production, use environment variables
+- 🧑 Replace the hardcoded user with proper user authentication (e.g., database)
+- 🕒 Tokens expire after 15 minutes — implement refresh tokens for longer sessions
 
 ---
 
