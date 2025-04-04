@@ -1,0 +1,17 @@
+# Don't commit secrets
+.env
+
+# Editor settings (optional, keeps VS Code configs out)
+.vscode/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.exe
+*.out
+*.o
+
+# Dependency directories (if added later)
+vendor/
